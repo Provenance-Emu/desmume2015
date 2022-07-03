@@ -204,15 +204,15 @@ static const u8 getvoltbl[] = {
 
 static u32 bios_nop_ARM9(void)
 {
-	LOG("SWI: ARM%c Unimplemented BIOS function %02X was used. R0:%08X, R1:%08X, R2:%08X\n", '9',
-							(cpu->instruction)&0x1F, cpu->R[0], cpu->R[1], cpu->R[2]);
+//	LOG("SWI: ARM%c Unimplemented BIOS function %02X was used. R0:%08X, R1:%08X, R2:%08X\n", '9',
+//							(cpu->instruction)&0x1F, cpu->R[0], cpu->R[1], cpu->R[2]);
 	return 3;
 }
 
 static u32 bios_nop_ARM7(void)
 {
-	LOG("SWI: ARM%c Unimplemented BIOS function %02X was used. R0:%08X, R1:%08X, R2:%08X\n", '7',
-							(cpu->instruction)&0x1F, cpu->R[0], cpu->R[1], cpu->R[2]);
+//	LOG("SWI: ARM%c Unimplemented BIOS function %02X was used. R0:%08X, R1:%08X, R2:%08X\n", '7',
+//							(cpu->instruction)&0x1F, cpu->R[0], cpu->R[1], cpu->R[2]);
 	return 3;
 }
 

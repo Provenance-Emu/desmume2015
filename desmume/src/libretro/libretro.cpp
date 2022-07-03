@@ -19,15 +19,33 @@
 #include "common.h"
 
 #define LAYOUTS_MAX 9
+    
 
+
+volatile int execute = 0;
+extern GPUSubsystem *GPU;
+extern CHEATS *cheats;
+
+GPU3DInterface* core3DList[] =
+{
+   &gpu3DNull,
+#ifdef HAVE_OPENGL
+   &gpu3Dgl_3_2,
+#endif
+    &gpu3DRasterize,
+#ifdef HAVE_OPENGL
+    &gpu3DglOld,
+#endif
+    NULL
+};
+
+extern "C" {
 retro_log_printf_t log_cb = NULL;
 static retro_video_refresh_t video_cb = NULL;
 static retro_input_poll_t poll_cb = NULL;
 static retro_input_state_t input_cb = NULL;
 retro_audio_sample_batch_t audio_batch_cb = NULL;
 retro_environment_t environ_cb = NULL;
-
-volatile int execute = 0;
 
 static int delay_timer = 0;
 static bool quick_switch_enable = false;
@@ -49,7 +67,6 @@ static uint16_t pointer_colour = 0xFFFF;
 
 static uint16_t *screen_buf;
 
-extern GPUSubsystem *GPU;
 
 int currFrameCounter;
 
@@ -1006,18 +1023,6 @@ static void check_variables(bool first_boot)
 #define GPU3D_SWRAST     1
 #endif
 
-GPU3DInterface* core3DList[] =
-{
-   &gpu3DNull,
-#ifdef HAVE_OPENGL
-   &gpu3Dgl_3_2,
-#endif
-    &gpu3DRasterize,
-#ifdef HAVE_OPENGL
-    &gpu3DglOld,
-#endif
-    NULL
-};
 
 void retro_set_video_refresh(retro_video_refresh_t cb) { video_cb = cb; }
 void retro_set_audio_sample(retro_audio_sample_t cb)   { }
@@ -1113,12 +1118,12 @@ void msgWndWarn(const char *fmt, ...)
       log_cb(RETRO_LOG_WARN, "%s.\n", msg_buf);
 }
 
-msgBoxInterface msgBoxWnd = {
-    msgWndInfo,
-    msgWndConfirm,
-    msgWndError,
-    msgWndWarn,
-};
+//msgBoxInterface msgBoxWnd = {
+//    msgWndInfo,
+//    msgWndConfirm,
+//    msgWndError,
+//    msgWndWarn,
+//};
 //====================== Dialogs end
 
 static void check_system_specs(void)
@@ -1211,7 +1216,7 @@ void retro_init (void)
 
     backup_setManualBackupType(MC_TYPE_AUTODETECT);
 
-    msgbox = &msgBoxWnd;
+//    msgbox = &msgBoxWnd;
    check_system_specs();
 }
 
@@ -1781,8 +1786,6 @@ size_t retro_get_memory_size(unsigned type)
 void retro_set_controller_port_device(unsigned in_port, unsigned device) { }
 unsigned retro_api_version(void) { return RETRO_API_VERSION; }
 
-extern CHEATS *cheats;
-
 void retro_cheat_reset(void)
 {
    if (cheats)
@@ -1838,3 +1841,5 @@ int ftruncate(int fd, off_t length)
    return -1;
 }
 #endif
+
+};

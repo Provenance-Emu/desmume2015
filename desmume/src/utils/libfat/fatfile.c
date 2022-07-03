@@ -37,6 +37,7 @@
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
+#include <zconf.h>
 #ifndef _MSC_VER
 #include <unistd.h>
 #endif
