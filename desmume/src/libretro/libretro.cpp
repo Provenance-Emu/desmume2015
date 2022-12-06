@@ -1195,7 +1195,7 @@ void retro_init (void)
    else
       log_cb = NULL;
 
-    colorMode = RETRO_PIXEL_FORMAT_RGB565;
+    colorMode = RETRO_PIXEL_FORMAT_0RGB1555;
     if(!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &colorMode))
        return;
 
@@ -1706,7 +1706,7 @@ bool retro_unserialize(const void * data, size_t size)
 
 bool retro_load_game(const struct retro_game_info *game)
 {
-   if (!game || colorMode != RETRO_PIXEL_FORMAT_RGB565)
+   if (!game || colorMode != RETRO_PIXEL_FORMAT_0RGB1555)
       return false;
 
    struct retro_input_descriptor desc[] = {
