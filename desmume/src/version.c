@@ -33,7 +33,7 @@
 
 //todo - everyone will want to support this eventually, i suppose
 #if defined(HOST_WINDOWS) || defined(DESMUME_COCOA) || defined(DESMUME_QT)
-	#include "svnrev.h"
+//	#include "svnrev.h"
 #else
 	#ifndef SVN_REV
 		#define SVN_REV 0
@@ -114,18 +114,18 @@
 	#define DESMUME_JIT ""
 #endif
 
-#ifdef PUBLIC_RELEASE
+//#ifdef PUBLIC_RELEASE
 const uint32_t DESMUME_SUBVERSION_NUMERIC = 0xFFFFFFFF;
-#else
-const uint32_t DESMUME_SUBVERSION_NUMERIC = SVN_REV;
-#endif
+//#else
+//const uint32_t DESMUME_SUBVERSION_NUMERIC = SVN_REV;
+//#endif
 
 const uint8_t DESMUME_VERSION_MAJOR = 0;
 const uint8_t DESMUME_VERSION_MINOR = 9;
 const uint8_t DESMUME_VERSION_BUILD = 11;
 
 #define DESMUME_VERSION_NUMERIC 91100
-#define DESMUME_VERSION_STRING " " "0.9.11" DESMUME_SUBVERSION_STRING DESMUME_FEATURE_STRING DESMUME_PLATFORM_STRING DESMUME_JIT DESMUME_CPUEXT_STRING
+#define DESMUME_VERSION_STRING "0.9.11"
 #define DESMUME_NAME_AND_VERSION DESMUME_NAME DESMUME_VERSION_STRING
 
 uint32_t EMU_DESMUME_VERSION_NUMERIC() { return DESMUME_VERSION_NUMERIC; }
